@@ -1,0 +1,32 @@
+.Card {
+  background: 'white';
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 0 1rem 2rem;
+  overflow: hidden;
+  width: 20rem;
+}
+
+.CardBody {
+  border-top: 1px solid lightgrey;
+  padding: 1rem;
+}
+
+.CardHeader {
+  background-size: cover;
+  height: 180px;
+}
+.CardHeader::after {
+  color: white;
+  content: attr(data-chip);
+  display: inline-block;
+  font-size: 7rem;
+  opacity: 0.5;
+  transform: rotate(30deg);
+  white-space: nowrap;
+}
+
+.CardLabel {
+  color: grey;
+}
