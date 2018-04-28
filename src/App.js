@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import api from './api'
+import Card from './Card'
 
 class App extends Component {
   state = {
@@ -10,10 +11,12 @@ class App extends Component {
     api('Keyboards')
       .select({
         maxRecords: 30,
-        view: 'Grid view'
+        view: 'Grid view',
+        fields: ['Name', 'Switches', 'Keycaps', 'Image']
       })
       .eachPage(
         (records, fetchNextPage) => {
+          console.log(records)
           this.setState({ records })
           // fetchNextPage();
         },
@@ -29,7 +32,7 @@ class App extends Component {
     const { records } = this.state
     return (
       <div className="App">
-        <h1>UTMK DB</h1>
+        <h1 style={{ margin: '1.5rem', textAlign: 'center' }}>UTMK DB</h1>
         <div
           style={{
             display: 'flex',
@@ -37,20 +40,7 @@ class App extends Component {
             justifyContent: 'center'
           }}
         >
-          {records.map(record => (
-            <div
-              key={record.id}
-              style={{
-                background: 'white',
-                width: '20rem',
-                boxShadow: '0 3px 5px rgba(0,0,0,.3)',
-                margin: '0 1rem 1rem 0',
-                padding: '.5rem'
-              }}
-            >
-              <h3 style={{ margin: 0 }}>{record.fields.Name}</h3>
-            </div>
-          ))}
+          {records.map(({ fields, id }) => <Card key={id} {...fields} />)}
         </div>
       </div>
     )
