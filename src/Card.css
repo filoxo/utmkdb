@@ -15,7 +15,9 @@
 
 .CardHeader {
   background-size: cover;
+  color: lightgrey;
   height: 180px;
+  overflow: hidden;
 }
 .CardHeader::after {
   color: white;
