@@ -10,21 +10,20 @@ class App extends Component {
   componentWillMount() {
     api('Keyboards')
       .select({
-        maxRecords: 30,
         view: 'Grid view',
-        fields: ['Name', 'Switches', 'Keycaps', 'Image']
+        fields: ['Name', 'Switches', 'Keycaps', 'Image'],
+        pageSize: 12
       })
       .eachPage(
         (records, fetchNextPage) => {
-          console.log(records)
-          this.setState({ records })
+          this.setState({ records: this.state.records.concat(records) })
           // fetchNextPage();
         },
         err => {
           if (err) {
             console.error(err)
-            return
           }
+          return
         }
       )
   }
