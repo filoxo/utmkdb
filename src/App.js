@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import './App.css'
 import api from './api'
 import Card from './Card'
+import Loading from './Loading'
 
 class App extends Component {
   state = {
     records: [],
     fetchNextPage: null,
     done: false
+  }
+  loadMore = () => {
+    this.setState({ loading: true }, this.state.fetchNextPage())
   }
   componentWillMount() {
     api('Keyboards')
@@ -20,7 +24,8 @@ class App extends Component {
         (records, fetchNextPage) => {
           this.setState({
             records: this.state.records.concat(records),
-            fetchNextPage
+            fetchNextPage,
+            loading: false
           })
         },
         err => {
@@ -32,7 +37,7 @@ class App extends Component {
       )
   }
   render() {
-    const { records, done, fetchNextPage } = this.state
+    const { records, loading, done } = this.state
     return (
       <div className="App">
         <h1 style={{ margin: '1.5rem', textAlign: 'center' }}>UTMK DB</h1>
@@ -46,10 +51,12 @@ class App extends Component {
           {records.map(({ fields, id }) => <Card key={id} {...fields} />)}
         </div>
         <div style={{ textAlign: 'center' }}>
-          {done ? (
+          {loading ? (
+            <Loading />
+          ) : done ? (
             <span>End of list</span>
           ) : (
-            <button type="button" onClick={fetchNextPage}>
+            <button type="button" onClick={this.loadMore}>
               Load more
             </button>
           )}
