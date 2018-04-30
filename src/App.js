@@ -3,6 +3,7 @@ import './App.css'
 import api from './api'
 import Card from './Card'
 import Loading from './Loading'
+import Observer from '@researchgate/react-intersection-observer'
 
 class App extends Component {
   state = {
@@ -10,9 +11,13 @@ class App extends Component {
     fetchNextPage: null,
     done: false
   }
+
   loadMore = () => {
-    this.setState({ loading: true }, this.state.fetchNextPage())
+    if (!this.state.done && !!this.state.fetchNextPage) {
+      this.setState({ loading: true }, this.state.fetchNextPage())
+    }
   }
+
   componentWillMount() {
     api('Keyboards')
       .select({
@@ -32,10 +37,11 @@ class App extends Component {
           if (err) {
             console.error(err)
           }
-          this.setState({ done: true })
+          this.setState({ done: true, loading: false })
         }
       )
   }
+
   render() {
     const { records, loading, done } = this.state
     return (
@@ -50,17 +56,19 @@ class App extends Component {
         >
           {records.map(({ fields, id }) => <Card key={id} {...fields} />)}
         </div>
-        <div style={{ textAlign: 'center' }}>
-          {loading ? (
-            <Loading />
-          ) : done ? (
-            <span>End of list</span>
-          ) : (
-            <button type="button" className="btn" onClick={this.loadMore}>
-              Load more
-            </button>
-          )}
-        </div>
+        <Observer onChange={this.loadMore} threshold={1}>
+          <div style={{ textAlign: 'center', padding: '1rem 0' }}>
+            {done ? (
+              <span>End of list</span>
+            ) : loading ? (
+              <Loading />
+            ) : (
+              <button type="button" className="btn" onClick={this.loadMore}>
+                Load more
+              </button>
+            )}
+          </div>
+        </Observer>
       </div>
     )
   }
