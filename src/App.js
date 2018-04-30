@@ -56,7 +56,7 @@ class App extends Component {
           ) : done ? (
             <span>End of list</span>
           ) : (
-            <button type="button" onClick={this.loadMore}>
+            <button type="button" className="btn" onClick={this.loadMore}>
               Load more
             </button>
           )}
