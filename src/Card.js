@@ -14,19 +14,21 @@ const Card = props => {
         <div
           className="CardHeader"
           data-chip={Name.split(' ')[0]}
-          style={{ backgroundColor: 'rgba(0,0,0,.1)' }}
+          style={{ backgroundColor: 'currentColor' }}
         />
       )}
       <div className="CardBody">
         <h3>{Name}</h3>
-        <p>
-          <span className="CardLabel">Switches: </span>
-          {Switches}
-        </p>
-        <p>
-          <span className="CardLabel">Keycaps: </span>
-          {Keycaps}
-        </p>
+        {Switches && (
+          <p>
+            <span className="CardLabel">{Switches} switches</span>
+          </p>
+        )}
+        {Keycaps && (
+          <p>
+            <span className="CardLabel">{Keycaps} keycaps</span>
+          </p>
+        )}
       </div>
     </div>
   )
