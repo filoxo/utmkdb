@@ -5,7 +5,9 @@ import Card from './Card'
 
 class App extends Component {
   state = {
-    records: []
+    records: [],
+    fetchNextPage: null,
+    done: false
   }
   componentWillMount() {
     api('Keyboards')
@@ -16,19 +18,21 @@ class App extends Component {
       })
       .eachPage(
         (records, fetchNextPage) => {
-          this.setState({ records: this.state.records.concat(records) })
-          // fetchNextPage();
+          this.setState({
+            records: this.state.records.concat(records),
+            fetchNextPage
+          })
         },
         err => {
           if (err) {
             console.error(err)
           }
-          return
+          this.setState({ done: true })
         }
       )
   }
   render() {
-    const { records } = this.state
+    const { records, done, fetchNextPage } = this.state
     return (
       <div className="App">
         <h1 style={{ margin: '1.5rem', textAlign: 'center' }}>UTMK DB</h1>
@@ -40,6 +44,15 @@ class App extends Component {
           }}
         >
           {records.map(({ fields, id }) => <Card key={id} {...fields} />)}
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          {done ? (
+            <span>End of list</span>
+          ) : (
+            <button type="button" onClick={fetchNextPage}>
+              Load more
+            </button>
+          )}
         </div>
       </div>
     )
