@@ -1,48 +1,39 @@
 import React, { Component } from 'react'
 import './App.css'
-import api from './api'
-import Card from './Card'
+import List from './List'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 class App extends Component {
-  state = {
-    records: []
-  }
-  componentWillMount() {
-    api('Keyboards')
-      .select({
-        maxRecords: 30,
-        view: 'Grid view',
-        fields: ['Name', 'Switches', 'Keycaps', 'Image']
-      })
-      .eachPage(
-        (records, fetchNextPage) => {
-          console.log(records)
-          this.setState({ records })
-          // fetchNextPage();
-        },
-        err => {
-          if (err) {
-            console.error(err)
-            return
-          }
-        }
-      )
-  }
   render() {
-    const { records } = this.state
     return (
-      <div className="App">
-        <h1 style={{ margin: '1.5rem', textAlign: 'center' }}>UTMK DB</h1>
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'wrap',
-            justifyContent: 'center'
-          }}
-        >
-          {records.map(({ fields, id }) => <Card key={id} {...fields} />)}
+      <Router>
+        <div className="App">
+          <nav>
+            <h1
+              style={{
+                display: 'inline-block',
+                margin: '1.5rem',
+                textAlign: 'center'
+              }}
+            >
+              UTMK DB
+            </h1>
+            <Link to="/">List</Link>
+            <Link to="/add">Add</Link>
+          </nav>
+          <Switch>
+            <Route exact path="/" component={List} />
+            <Route
+              path="/add"
+              render={props => <div>{JSON.stringify(props)}</div>}
+            />
+            <Route
+              path="/:id"
+              render={() => <div>Single keybaord record</div>}
+            />
+          </Switch>
         </div>
-      </div>
+      </Router>
     )
   }
 }
