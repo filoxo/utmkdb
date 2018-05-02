@@ -11,11 +11,9 @@ const Card = props => {
           style={{ backgroundImage: `url(${Image[0].thumbnails.large.url}` }}
         />
       ) : (
-        <div
-          className="CardHeader"
-          data-chip={Name.split(' ')[0]}
-          style={{ backgroundColor: 'currentColor' }}
-        />
+        <div className="CardHeader">
+          <span>{Name.split(' ')[0]}</span>
+        </div>
       )}
       <div className="CardBody">
         <h3>{Name}</h3>

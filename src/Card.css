@@ -1,6 +1,6 @@
 .Card {
   background: white;
-  border: 1px solid lightgrey;
+  border: 1px solid #9195a0;
   border-radius: 5px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   margin: 0 1rem 2rem;
@@ -9,26 +9,27 @@
 }
 
 .CardBody {
-  border-top: 1px solid lightgrey;
+  border-top: 1px solid #9195a0;
   padding: 1rem;
 }
 
 .CardHeader {
   background-size: cover;
-  color: lightgrey;
+  background-color: currentColor;
+  color: #9195a0;
   height: 180px;
   overflow: hidden;
+  user-select: none;
 }
-.CardHeader::after {
-  color: white;
-  content: attr(data-chip);
+
+.CardHeader span {
+  color: rgba(255, 255, 255, 0.5);
   display: inline-block;
   font-size: 7rem;
-  opacity: 0.5;
   transform: rotate(30deg);
   white-space: nowrap;
 }
 
 .CardLabel {
-  color: grey;
+  color: #9195a0;
 }
