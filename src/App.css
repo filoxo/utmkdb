@@ -1,0 +1,33 @@
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  background-color: #353d51;
+  background-image: url(./utmk.svg);
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  display: inline-block;
+  height: 40px;
+  margin-right: 0.5rem;
+  width: 40px;
+}
+
+.nav {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Fix for CardHeader text stacking context issue */
+}
+.nav a {
+  color: inherit;
+  margin-right: 1rem;
+  text-decoration: none;
+}

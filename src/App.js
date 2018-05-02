@@ -8,17 +8,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <nav>
-            <h1
-              style={{
-                display: 'inline-block',
-                margin: '1.5rem',
-                textAlign: 'center'
-              }}
-            >
-              UTMK DB
-            </h1>
-            <Link to="/">List</Link>
+          <nav className="nav">
+            <Link to="/" className="logo-wrapper">
+              <span className="logo" />
+              <span>UTMK DB</span>
+            </Link>
             <Link to="/add">Add</Link>
           </nav>
           <Switch>
