@@ -11,10 +11,20 @@ export default class List extends Component {
     done: false
   }
 
-  loadMore = () => {
-    if (!this.state.done && !!this.state.fetchNextPage) {
-      this.setState({ loading: true }, this.state.fetchNextPage())
+  loadMore = e => {
+    if (
+      e.isIntersecting &&
+      e.intersectionRatio === 1 &&
+      this.state.records.length &&
+      !this.state.done &&
+      !!this.state.fetchNextPage
+    ) {
+      this.recordedTimeout = setTimeout(() => {
+        this.setState({ loading: true }, this.state.fetchNextPage())
+      }, 1000)
+      return
     }
+    clearTimeout(this.recordedTimeout)
   }
 
   componentWillMount() {
