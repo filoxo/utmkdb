@@ -37,7 +37,7 @@ export default class UserSelect extends React.Component {
     return (
       <Downshift
         onChange={this.props.onSelect}
-        itemToString={({ name }) => name || ''}
+        itemToString={({ name, id }) => name || id || ''}
       >
         {({ getInputProps, getItemProps }) => (
           <div>
