@@ -10,7 +10,7 @@
   padding: 1.5rem;
 }
 
-.input {
+.input:not([type='checkbox']):not([type='radio']) {
   border: 0;
   border-bottom: 1px solid #9195a0;
   display: block;
