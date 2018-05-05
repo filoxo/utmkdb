@@ -38,11 +38,11 @@ export default class Add extends React.Component {
           <input type="file" className="input" id="image" />
         </div>
         <div>
-          <label htmlFor="forSale">For sale?</label>
           <input type="checkbox" className="input" id="forSale" />
+          <label htmlFor="forSale">For sale?</label>
         </div>
         <div>
-          <button>Submit</button>
+          <button className="btn">Submit</button>
         </div>
       </form>
     )
