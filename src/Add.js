@@ -1,5 +1,6 @@
 import React from 'react'
 import './Add.css'
+import UserSelect from './UserSelect'
 
 export default class Add extends React.Component {
   submit = e => {
@@ -30,7 +31,7 @@ export default class Add extends React.Component {
         </div>
         <div>
           <label htmlFor="owner">Owner</label>
-          <input type="text" className="input" id="owner" required />
+          <UserSelect onSelect={selected => console.log(selected)} />
         </div>
         <div>
           <label htmlFor="image">Image</label>
