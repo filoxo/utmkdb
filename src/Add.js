@@ -3,6 +3,9 @@ import './Add.css'
 import UserSelect from './UserSelect'
 
 export default class Add extends React.Component {
+  state = {
+    user: null
+  }
   submit = e => {
     e.preventDefault()
   }
@@ -31,7 +34,10 @@ export default class Add extends React.Component {
         </div>
         <div>
           <label htmlFor="owner">Owner</label>
-          <UserSelect onSelect={selected => console.log(selected)} />
+          <UserSelect
+            onSelect={user => this.setState({ user })}
+            selectedItem={this.state.user}
+          />
         </div>
         <div>
           <label htmlFor="image">Image</label>
