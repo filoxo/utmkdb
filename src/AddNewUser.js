@@ -14,6 +14,13 @@ export default class AddNewUser extends React.Component {
   componentWillUnmount() {
     document.body.style.overflow = this.bodyOverflow
   }
+  onUserNameChange = e => {
+    const newUserName = e.target.value
+    const userAlreadyExists = !!this.props.users.find(
+      u => u.name === newUserName
+    )
+    this.setState({ newUserName, userAlreadyExists })
+  }
   render() {
     return ReactDOM.createPortal(
       <div className="modal">
@@ -24,9 +31,13 @@ export default class AddNewUser extends React.Component {
             className="input"
             type="text"
             value={this.state.newUserName}
-            onChange={e => this.setState({ newUserName: e.target.value })}
+            onChange={this.onUserNameChange}
           />
-          <button type="button" className="btn" disabled={true}>
+          <button
+            type="button"
+            className="btn"
+            disabled={!this.state.newUserName || this.state.userAlreadyExists}
+          >
             Submit
           </button>
         </div>
