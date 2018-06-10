@@ -41,6 +41,9 @@ export default class AddNewUser extends React.Component {
             onChange={this.onUserNameChange}
             ref={this.userNameInput}
           />
+          {this.state.userAlreadyExists && (
+            <p style={{ color: 'crimson' }}>Username already exists</p>
+          )}
           <button
             type="button"
             className="btn"
