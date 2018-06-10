@@ -30,6 +30,9 @@ p {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
+.btn[disabled] {
+  opacity: 0.5;
+}
 
 .input:not([type='checkbox']):not([type='radio']) {
   border: 0;
