@@ -11,9 +11,11 @@ export default class AddNewUser extends React.Component {
   componentDidMount() {
     this.bodyOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    document.getElementById('root').setAttribute('aria-hidden', true)
     this.userNameInput.current.focus()
   }
   componentWillUnmount() {
+    document.getElementById('root').removeAttribute('aria-hidden')
     document.body.style.overflow = this.bodyOverflow
   }
   onUserNameChange = e => {
