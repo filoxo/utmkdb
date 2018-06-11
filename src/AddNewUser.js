@@ -53,6 +53,9 @@ export default class AddNewUser extends React.Component {
           >
             Submit
           </button>
+          <button type="button" className="btn" onClick={this.props.toggle}>
+            Cancel
+          </button>
         </div>
       </div>,
       document.body

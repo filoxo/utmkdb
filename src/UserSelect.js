@@ -36,6 +36,10 @@ export default class UserSelect extends React.Component {
       )
   }
 
+  toggleAddNewUserModal = () => {
+    this.setState({ addNewUser: !this.state.addNewUser })
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -106,7 +110,12 @@ export default class UserSelect extends React.Component {
             </div>
           )}
         </Downshift>
-        {this.state.addNewUser && <AddNewUser users={this.state.users} />}
+        {this.state.addNewUser && (
+          <AddNewUser
+            users={this.state.users}
+            toggle={this.toggleAddNewUserModal}
+          />
+        )}
       </React.Fragment>
     )
   }
