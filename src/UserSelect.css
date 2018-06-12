@@ -1,0 +1,26 @@
+.menu {
+  border: 1px solid #9195a0;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  list-style-type: none;
+  margin: 0;
+  max-height: 200;
+  overflow-y: scroll;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: '#fff';
+}
+
+.option {
+  background-color: #fff;
+  padding: 5px;
+}
+
+.option:hover,
+.option:focus {
+  background-color: #ddd;
+}

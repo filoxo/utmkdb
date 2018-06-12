@@ -2,6 +2,7 @@ import React from 'react'
 import Downshift from 'downshift'
 import api from './api'
 import AddNewUser from './AddNewUser'
+import './UserSelect.css'
 
 export default class UserSelect extends React.Component {
   state = {
@@ -61,27 +62,13 @@ export default class UserSelect extends React.Component {
                 aria-expanded={isOpen}
               />
               <ul
-                style={{
-                  border: '1px solid #9195a0',
-                  borderTop: 'none',
-                  borderBottomLeftRadius: '5px',
-                  borderBottomRightRadius: '5px',
-                  listStyleType: 'none',
-                  margin: 0,
-                  maxHeight: 200,
-                  overflowY: 'scroll',
-                  padding: 0,
-                  position: 'absolute',
-                  top: '100%',
-                  left: '0',
-                  right: '0',
-                  backgroundColor: '#fff',
-                  display: isOpen ? 'block' : 'none'
-                }}
+                className="menu"
+                style={{ display: isOpen ? 'block' : 'none' }}
               >
                 <li
-                  style={{ padding: 5 }}
+                  className="option"
                   onClick={() => this.setState({ addNewUser: true })}
+                  role="option"
                 >
                   Add new user...
                 </li>
@@ -91,14 +78,10 @@ export default class UserSelect extends React.Component {
                     {...getItemProps({
                       item: user,
                       style: {
-                        backgroundColor:
-                          highlightedIndex === index
-                            ? 'rgba(0,0,0,0.1)'
-                            : '#fff',
                         fontWeight:
-                          this.props.selectedItem === user ? 'bold' : 'normal',
-                        padding: 5
+                          this.props.selectedItem === user ? 'bold' : 'normal'
                       },
+                      className: 'option',
                       'aria-selected': this.props.selectedItem === user
                     })}
                     role="option"
