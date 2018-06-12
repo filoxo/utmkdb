@@ -41,6 +41,11 @@ export default class UserSelect extends React.Component {
     this.setState({ addNewUser: !this.state.addNewUser })
   }
 
+  addUser = user => {
+    this.setState({ users: this.state.users.concat(user) })
+    this.props.onSelect(user)
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -97,6 +102,7 @@ export default class UserSelect extends React.Component {
           <AddNewUser
             users={this.state.users}
             toggle={this.toggleAddNewUserModal}
+            onComplete={this.addUser}
           />
         )}
       </React.Fragment>
