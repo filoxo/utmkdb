@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import api from './api'
 import './AddNewUser.css'
 
 export default class AddNewUser extends React.Component {
@@ -30,6 +31,18 @@ export default class AddNewUser extends React.Component {
       this.state.userAlreadyExists ? 'Username already exists' : ''
     )
   }
+  onSubmit = () => {
+    api('Discord users').create(
+      { 'Discord Username': this.state.newUserName },
+      (err, record) => {
+        this.props.onComplete({
+          id: record.id,
+          name: record.get('Discord Username')
+        })
+        this.props.toggle()
+      }
+    )
+  }
   render() {
     return ReactDOM.createPortal(
       <div className="modal">
@@ -50,6 +63,7 @@ export default class AddNewUser extends React.Component {
             type="button"
             className="btn"
             disabled={!this.state.newUserName || this.state.userAlreadyExists}
+            onClick={this.onSubmit}
           >
             Submit
           </button>
