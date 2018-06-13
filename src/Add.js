@@ -2,6 +2,7 @@ import React from 'react'
 import api from './api'
 import './Add.css'
 import UserSelect from './UserSelect'
+const partial = (f, a) => b => f(a, b)
 
 export default class Add extends React.Component {
   state = {
@@ -10,7 +11,8 @@ export default class Add extends React.Component {
     Switches: '',
     Keycaps: '',
     Description: '',
-    'For Sale': false
+    'For Sale': false,
+    Image: []
   }
 
   input = event => {
@@ -20,11 +22,23 @@ export default class Add extends React.Component {
     })
   }
 
+  inputImage = (i, e) => {
+    const Image = [...this.state.Image]
+    Image[i] = e.target.value
+    this.setState({ Image })
+  }
+
   submit = e => {
     e.preventDefault()
     const data = JSON.parse(JSON.stringify(this.state))
     data.Owner = [data.user.id]
+    delete data.user
+    data.Image = data.Image.map(url => ({ url }))
     console.log(data)
+  }
+
+  addImgUrl = () => {
+    this.setState({ Image: [...this.state.Image, ''] })
   }
 
   render() {
@@ -83,8 +97,32 @@ export default class Add extends React.Component {
           />
         </div>
         <div>
-          <label htmlFor="image">Image</label>
-          <input type="file" className="input" id="image" />
+          <fieldset>
+            <legend>Images</legend>
+            {this.state.Image.map((url, i) => (
+              <input
+                type="url"
+                className="input"
+                placeholder="Public image url"
+                key={`Image.${i}`}
+                value={url}
+                onChange={partial(this.inputImage, i)}
+              />
+            ))}
+            <button
+              className="btn small"
+              type="button"
+              onClick={this.addImgUrl}
+            >
+              Add image url
+            </button>
+            <div>
+              <small>
+                Airtable will download the file at the given url and keep a
+                copy.
+              </small>
+            </div>
+          </fieldset>
         </div>
         <div>
           <input
