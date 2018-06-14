@@ -2,7 +2,7 @@ import React from 'react'
 import api from './api'
 import './Add.css'
 import UserSelect from './UserSelect'
-const partial = (f, a) => b => f(a, b)
+import { partial, copyObject } from './helpers'
 
 export default class Add extends React.Component {
   state = {
@@ -30,7 +30,7 @@ export default class Add extends React.Component {
 
   submit = e => {
     e.preventDefault()
-    const data = JSON.parse(JSON.stringify(this.state))
+    const data = copyObject(this.state)
     data.Owner = [data.user.id]
     delete data.user
     data.Image = data.Image.map(url => ({ url }))
