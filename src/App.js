@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import List from './List'
 import Add from './Add'
+import Details from './Details'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 
 class App extends Component {
@@ -19,10 +20,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={List} />
             <Route path="/add" component={Add} />
-            <Route
-              path="/:id"
-              render={() => <div>Single keybaord record</div>}
-            />
+            <Route path="/:id" component={Details} />
           </Switch>
         </div>
       </Router>
