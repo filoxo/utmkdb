@@ -34,7 +34,9 @@ export default class Add extends React.Component {
     data.Owner = [data.user.id]
     delete data.user
     data.Image = data.Image.map(url => ({ url }))
-    console.log(data)
+    api('Keyboards').select(data, (err, record) => {
+      this.props.history.push('/' + record.id)
+    })
   }
 
   addImgUrl = () => {
