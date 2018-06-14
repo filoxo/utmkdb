@@ -16,9 +16,9 @@ export default class Add extends React.Component {
   }
 
   input = event => {
-    const { name, value, checked } = event.target
+    const { name, value, checked, type } = event.target
     this.setState({
-      [name]: checked || value
+      [name]: type === 'checkbox' ? checked : value
     })
   }
 
